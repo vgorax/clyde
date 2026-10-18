@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clyde Workbook</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="prompt-glyph">&gt;_</span> clyde <span class="dim">· claude terminal + code workbook</span></div>
+    <form id="key-form" class="key-form" autocomplete="off">
+      <label for="api-key" class="dim">API key</label>
+      <input id="api-key" type="password" placeholder="sk-ant-..." spellcheck="false" autocomplete="off" data-1p-ignore data-lpignore="true" />
+      <span class="dim" title="Key and code are kept in this tab's memory only and cleared when the tab closes">session only</span>
+      <select id="model" title="Model">
+        <option value="claude-opus-5-5">claude-opus-5-5</option>
+        <option value="claude-sonnet-5-5">claude-sonnet-5-5</option>
+        <option value="claude-haiku-4-5">claude-haiku-4-5</option>
+      </select>
+      <span id="key-status" class="key-status off">no key</span>
+    </form>
+  </header>
+
+  <main class="split">
+    <!-- Left: terminal chat -->
+    <section class="pane terminal" aria-label="Claude terminal">
+      <div class="pane-title">
+        <span>● ● ●</span><span class="dim">claude — chat</span>
+        <button id="clear-chat" class="ghost" title="Clear conversation">clear</button>
+      </div>
+      <div id="log" class="log" aria-live="polite"></div>
+      <form id="chat-form" class="input-row">
+        <span class="prompt-glyph">&gt;</span>
+        <textarea id="chat-input" rows="1" placeholder="Ask Claude to build something…  (Enter to send, Shift+Enter for newline, /help)" spellcheck="false"></textarea>
+        <button id="send" type="submit">send</button>
+      </form>
+    </section>
+
+    <div class="divider" id="divider" title="Drag to resize"></div>
+
+    <!-- Right: code workbook -->
+    <section class="pane workbook" aria-label="Code workbook">
+      <div class="pane-title">
+        <nav id="tabs" class="tabs"></nav>
+        <div class="actions">
+          <button id="run" title="Render preview (Ctrl+Enter)">▶ run</button>
+          <button id="copy" class="ghost" title="Copy tab">copy</button>
+          <button id="download" class="ghost" title="Download tab">save</button>
+        </div>
+      </div>
+      <div class="editor-wrap">
+        <pre id="gutter" class="gutter" aria-hidden="true">1</pre>
+        <textarea id="editor" class="editor" spellcheck="false" wrap="off"></textarea>
+      </div>
+      <div class="preview-bar">
+        <span class="dim" id="preview-label">preview</span>
+        <label class="dim"><input type="checkbox" id="auto-run" checked /> auto-run</label>
+      </div>
+      <iframe id="preview" class="preview" title="Preview" sandbox="allow-scripts allow-modals allow-forms allow-popups"></iframe>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
